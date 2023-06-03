@@ -3,9 +3,7 @@ import Cookies from "js-cookie";
 import React from "react";
 
 const Header = (props) => {
-  console.log("hit");
   var navigate = useNavigate();
-  // var [showStates, setShowStates] = useState(false);
   function IfLogged() {
     if (!props.isLoggedIn) {
       return (
@@ -75,7 +73,7 @@ const Header = (props) => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span classNam="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           <div

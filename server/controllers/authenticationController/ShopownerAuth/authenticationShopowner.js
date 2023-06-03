@@ -4,14 +4,24 @@ const bcrypt = require("bcryptjs");
 
 // ------------------- Sing in -----------------------
 exports.SignInShopOwner = async (req, res) => {
-  var { name, email, password, cpassword, number, address, barber, services } =
-    req.body;
+  var {
+    name,
+    email,
+    shopname,
+    password,
+    cpassword,
+    number,
+    address,
+    barber,
+    services,
+  } = req.body;
 
   if (
     !(
       name &&
       email &&
       password &&
+      shopname &&
       cpassword &&
       number &&
       address &&
@@ -42,6 +52,7 @@ exports.SignInShopOwner = async (req, res) => {
       email,
       password,
       number,
+      shopname,
       address,
       barber,
       services,
@@ -84,7 +95,7 @@ exports.LogInShopOwner = async (req, res) => {
       process.env.TOKEN_KEY,
       { expiresIn: "12h" }
     );
-    res.json({ status: "OK", role: data.role, token });
+    res.json({ status: "OK", token });
   } else {
     res.json({ status: "INVALID_PW", message: "password is invalid." });
   }

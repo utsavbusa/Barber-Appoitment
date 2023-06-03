@@ -10,6 +10,9 @@ const schema = new mongoose.Schema({
     type: String,
     default: "FALSE",
   },
+  shopId: {
+    tyep: mongoose.Schema.Types.ObjectId,
+  },
 });
 
 schema.pre("save", async function (next) {

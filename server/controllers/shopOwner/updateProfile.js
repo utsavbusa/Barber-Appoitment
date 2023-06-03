@@ -1,9 +1,9 @@
-const User = require("../../models/Customer");
+const User = require("../../models/ShopOwner");
 
 exports.updateProfile = async (req, res) => {
-  var { shopName, pincode, address, services, email } = req.body;
+  var { name, email, shopname, number, address, barber, services } = req.body;
 
-  if (!(shopName && pincode && address && services && email)) {
+  if (!(name && email && shopname && number && address && barber && services)) {
     return res.json({
       status: "MISSING_FIELD",
       message: "all fileds are required.",
@@ -18,5 +18,7 @@ exports.updateProfile = async (req, res) => {
   }
   try {
     var data = await User.updateOne({ email: email }, { $set: {} });
-  } catch {}
+  } catch (error) {
+    return res.json({ status: "X", message: "something went wrong." });
+  }
 };

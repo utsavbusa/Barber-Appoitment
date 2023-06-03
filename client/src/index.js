@@ -16,11 +16,11 @@ import CustomerHome from "./pages/Customer/CustomerHome";
 
 const appRouter = createBrowserRouter([
   {
-    path: "/LogIn",
+    path: "/LogIn/:role",
     element: <LogIn />,
   },
   {
-    path: "/SignIn",
+    path: "/SignIn/:role",
     element: <SignIn />,
   },
   {
@@ -28,11 +28,11 @@ const appRouter = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/user/ShopOwner",
+    path: "/user/shopowner",
     element: <ShopOwnerApp />,
     children: [
       {
-        path: "",
+        path: "home",
         element: <ShopOwnerHome />,
       },
     ],

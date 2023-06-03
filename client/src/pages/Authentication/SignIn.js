@@ -1,41 +1,56 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
 const SignIn = () => {
   var navigate = useNavigate();
+  const { role } = useParams();
 
-  const [data, setData] = useState({
+  const [cdata, setCData] = useState({
     name: "",
     email: "",
     password: "",
     cpassword: "",
-    role: "",
     number: "",
+  });
+  const [sdata, setSData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
+    number: "",
+    address: "",
+    services: [],
+    barber: "",
   });
 
   const [message, setMessage] = useState("");
 
   function handleData(e) {
+    console.log(cdata);
     var name = e.target.name;
     var value = e.target.value;
-    if (name === "role") {
-      if (value === "1") {
-        value = "shopowner";
-      } else {
-        value = "customer";
-      }
+    if (role === "customer") {
+      setCData({ ...cdata, [name]: value });
+    } else {
+      setSData({ ...sdata, [name]: value });
     }
-    setData({ ...data, [name]: value });
   }
 
   function sendData() {
-    fetch("http://localhost:3001/api/v1/authentication/SignIn", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `http://localhost:3001/api/v1/authentication/${
+        role === "customer" ? "customer/SignIn" : "shopowner/SignIn"
+      }`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(() => {
+          return role === "customer" ? cdata : sdata;
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         if (res.status === "OK") {
@@ -51,16 +66,9 @@ const SignIn = () => {
       });
   }
 
-  return (
-    <>
-      <Link to="/" className="my-link my-hover-green fs-1 m-3">
-        &larr;
-      </Link>
-
-      <div
-        className="container-sm position-absolute top-50 start-50 translate-middle"
-        style={{ background: "hsla(0, 0%, 100%, 0.8)" }}
-      >
+  function CustomerSignIn() {
+    return (
+      <>
         <section className="text-center">
           <div
             className="p-5 bg-image"
@@ -141,24 +149,8 @@ const SignIn = () => {
                     />
                   </div>
 
-                  <div className="form-outline mb-4">
-                    <select
-                      className="w-100 p-2  border rounded"
-                      aria-label="Default select example"
-                      name="role"
-                      onChange={handleData}
-                      required
-                    >
-                      <option defaultValue={"select your role"}>
-                        Select your role
-                      </option>
-                      <option value="1">ShopOwner</option>
-                      <option value="2">Customer</option>
-                    </select>
-                  </div>
-
                   <div className="d-flex justify-content-start mb-4">
-                    <Link to="/login">alerday have account</Link>
+                    <Link to={`/login/customer`}>alerday have account</Link>
                   </div>
                   <button
                     className="btn btn-primary btn-block mb-4"
@@ -171,6 +163,24 @@ const SignIn = () => {
             </div>
           </div>
         </section>
+      </>
+    );
+  }
+  function ShopownerSignIn() {
+    return <>utsav busa</>;
+  }
+
+  return (
+    <>
+      <Link to="/" className="my-link my-hover-green fs-1 m-3">
+        &larr;
+      </Link>
+
+      <div
+        className="container-sm top-10"
+        style={{ background: "hsla(0, 0%, 100%, 0.8)" }}
+      >
+        {role === "customer" ? <CustomerSignIn /> : <ShopownerSignIn />}
       </div>
     </>
   );

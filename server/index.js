@@ -10,13 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 
 //make authecation varible fome routes
 const authentication = require("./routes/authentication");
+const shopowner = require("./routes/shopowner");
 
 app.use("/api/v1/authentication", authentication);
-
-app.get("/", (req, res) => {
-  console.log("Hello world received a request.");
-  res.send("hello frome barber");
-});
+app.use("/api/v1/user/shopowner", shopowner);
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log("\n------------------START-----------------------\n");

@@ -5,6 +5,7 @@ const schema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  shopname: String,
   number: String,
   address: String,
   barber: String,

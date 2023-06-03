@@ -64,7 +64,7 @@ exports.LogIn = async (req, res) => {
       process.env.TOKEN_KEY,
       { expiresIn: "5h" }
     );
-    res.json({ status: "OK", role: data.role, token });
+    res.json({ status: "OK", token });
   } else {
     res.json({ status: "INVALID_PW", message: "password is invalid." });
   }

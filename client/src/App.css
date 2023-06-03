@@ -52,6 +52,9 @@ select:focus {
 a {
   text-decoration: none;
 }
+.border_none {
+  border: none;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

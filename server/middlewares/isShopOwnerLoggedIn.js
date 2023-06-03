@@ -2,21 +2,16 @@ const jwt = require("jsonwebtoken");
 
 const isShopOwnerLoggedIn = (req, res, next) => {
   var token = req.headers.token || req.body.token;
+
+  console.log(req.headers.token);
   if (!token) {
     return res.json({ status: "MISSING_TOKEN", message: "Token is missing." });
   }
 
   try {
     var payLoad = jwt.verify(token, process.env.TOKEN_KEY);
-    req.user_id = payLoad.user_id;
-    if (payLoad.role === "shopowner") {
-      next();
-    } else {
-      return res.json({
-        status: "ACCESS_DENIED",
-        message: "Not an ShopOwner.",
-      });
-    }
+    req.ShopOwner_id = payLoad.ShopOwner_id;
+    next();
   } catch (error) {
     return res.json({
       status: "EXPIRED_TOKEN",
