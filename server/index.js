@@ -11,9 +11,18 @@ app.use(express.urlencoded({ extended: true }));
 //make authecation varible fome routes
 const authentication = require("./routes/authentication");
 const shopowner = require("./routes/shopowner");
+const customer = require("./routes/customer");
 
+//authentication rout for sign and login for both customer and shopowner
 app.use("/api/v1/authentication", authentication);
+
+//shopowner routes for all the shopowner request from the client
 app.use("/api/v1/user/shopowner", shopowner);
+
+//customer routes for all the customer request from the client
+app.use("/api/v1/user/customer", customer);
+
+
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log("\n------------------START-----------------------\n");

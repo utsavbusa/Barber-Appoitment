@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
     default: "FALSE",
   },
   shopId: {
-    tyep: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
   },
 });
 

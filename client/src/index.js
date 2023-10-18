@@ -13,6 +13,8 @@ import ShopOwnerApp from "./pages/Shopowner/ShopOwnerApp";
 
 import CustomerApp from "./pages/Customer/CustomerApp";
 import CustomerHome from "./pages/Customer/CustomerHome";
+import Shopownerprofile from "./pages/Shopowner/Shopownerprofile";
+import Shopcustomer from "./pages/Shopowner/Shopcustomer";
 
 const appRouter = createBrowserRouter([
   {
@@ -32,8 +34,16 @@ const appRouter = createBrowserRouter([
     element: <ShopOwnerApp />,
     children: [
       {
-        path: "home",
+        path: "",
         element: <ShopOwnerHome />,
+      },
+      {
+        path: "profile",
+        element: <Shopownerprofile />,
+      },
+      {
+        path: "customer",
+        element: <Shopcustomer />,
       },
     ],
   },

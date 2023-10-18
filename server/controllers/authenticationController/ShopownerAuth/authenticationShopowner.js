@@ -7,7 +7,6 @@ exports.SignInShopOwner = async (req, res) => {
   var {
     name,
     email,
-    shopname,
     password,
     cpassword,
     number,
@@ -16,19 +15,23 @@ exports.SignInShopOwner = async (req, res) => {
     services,
   } = req.body;
 
+  
+
+
+
   if (
     !(
       name &&
       email &&
       password &&
-      shopname &&
       cpassword &&
       number &&
       address &&
-      barber &&
+      barber && 
       services
     )
   ) {
+   
     return res.json({
       status: "MISSING_FIELD",
       messgae: "all fildes are required.",
@@ -52,7 +55,6 @@ exports.SignInShopOwner = async (req, res) => {
       email,
       password,
       number,
-      shopname,
       address,
       barber,
       services,

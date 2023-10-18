@@ -12,14 +12,14 @@ const CustomerApp = () => {
 
   useEffect(() => {
     if (!Cookies.get("customerToken")) {
-      navigate("/login");
+      navigate("/Login/customer");
     } else {
       setLogInStatus(true);
     }
   }, [navigate]);
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} setLogInStatus={setLogInStatus} />
+      <Header isLoggedIn={isLoggedIn} setLogInStatus={setLogInStatus} name={Cookies.get('customerName')} />
       <Outlet></Outlet>
       <Footer />
     </>

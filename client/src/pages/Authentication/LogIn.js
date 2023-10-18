@@ -37,6 +37,13 @@ const LogIn = (props) => {
             cookie.set("customerToken", res.token, {
               expires: new Date().getTime() + 2 * 1000 * 3600,
             });
+            cookie.set("customerName", res.customerName,{
+              expires: new Date().getTime() + 2 * 1000 * 3600,
+            });
+            cookie.set("isBooked", res.isBooked, {
+              expires: new Date().getTime() + 2 * 1000 * 3600,
+            })
+            console.log(res.customerName);
             navigate("/user/customer");
           }
           if (role === "shopowner") {

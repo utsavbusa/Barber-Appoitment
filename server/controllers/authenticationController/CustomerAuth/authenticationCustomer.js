@@ -4,14 +4,19 @@ const bcrypt = require("bcryptjs");
 
 // ------------------- Sing in -----------------------
 exports.SignIn = async (req, res) => {
-  var { name, email, password, cpassword, number } = req.body;
 
+  var { name, email, password, cpassword, number } = req.body;
+  
   if (!(name && email && password && cpassword && number)) {
+   
+    
     return res.json({
       status: "MISSING_FIELD",
       messgae: "all fildes are required.",
     });
+   
   }
+
 
   if (cpassword !== password) {
     return res.json({
@@ -20,9 +25,11 @@ exports.SignIn = async (req, res) => {
     });
   }
 
+
   if (await Customer.findOne({ email })) {
     return res.json({ status: "EXISTS", message: "Customer allrady exist." });
   }
+
 
   try {
     var data = await Customer.create({ name, email, password, number });
@@ -36,6 +43,7 @@ exports.SignIn = async (req, res) => {
 
   data.password = undefined;
   res.json({ status: "OK", data });
+
 };
 
 // ------------------------ Log in ---------------------------
@@ -64,7 +72,7 @@ exports.LogIn = async (req, res) => {
       process.env.TOKEN_KEY,
       { expiresIn: "5h" }
     );
-    res.json({ status: "OK", token });
+    res.json({ status: "OK", token,customerName:data.name ,isBooked : data.isBooked });
   } else {
     res.json({ status: "INVALID_PW", message: "password is invalid." });
   }

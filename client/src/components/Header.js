@@ -7,7 +7,7 @@ const Header = (props) => {
   function IfLogged() {
     if (!props.isLoggedIn) {
       return (
-        <li className="nav-item">
+        <li className="">
           <Link to="/login">
             <button className="btn btn-outline-secondary ms-2" type="button">
               Sign In / Sign Up
@@ -18,13 +18,13 @@ const Header = (props) => {
     } else {
       return (
         <>
-          <li className="nav-item dropdown">
+          <li className=" dropdown">
             <button
               className="btn px-4 fw-bolder rounded-pill btn-outline-success mx-3 "
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {/* {props.name.charAt(0).toUpperCase()} */}user name
+              {props.name.toUpperCase()[0]}
             </button>
             <ul className="dropdown-menu">
               <li>
