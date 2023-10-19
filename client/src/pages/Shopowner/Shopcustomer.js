@@ -8,13 +8,15 @@ const Shopcustomer = () => {
     // const [newCustomer,setNewCustomer] = useState(false);
   const navigate = useNavigate();
   const [data,setdata] = useState([]);
+  const [newCustomer, setNewCustomer] = useState({})
+  // const dataLength = data.length;
     
   useEffect(() => {
     fetch("http://localhost:3001/api/v1/user/shopowner/customerlist", {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
-        "token": Cookies.get("customerToken")
+        "token": Cookies.get("shopOwnerToken")
       }
     }).then(res => res.json())
       .then(res => {
@@ -22,7 +24,7 @@ const Shopcustomer = () => {
           setdata(res.data.list);
         }
         else if (res.status === "EXPIRED_TOKEN") {
-          navigate("/login");
+          navigate("/Login/shopowner");
         }
 
       })
@@ -76,6 +78,7 @@ const Shopcustomer = () => {
                         id="formGroupExampleInput"
                         placeholder="Name "
                         style={{ backgroundColor: "#f7f7f8" }}
+                        onChange={(e)=>{setNewCustomer({...newCustomer, customerName:e.target.value})}}
                       />
                     </div>
                     <div className="mb-3">
@@ -88,6 +91,7 @@ const Shopcustomer = () => {
                         id="formGroupExampleInput"
                         placeholder="Number "
                         style={{ backgroundColor: "#f7f7f8" }}
+                        onChange={(e) => { setNewCustomer({ ...newCustomer, customerNumber: e.target.value }) }}
                       />
                     </div>
                   </form>
@@ -107,9 +111,11 @@ const Shopcustomer = () => {
               </div>
             </div>
           </div>
-
+        {
+            !data ? <h4 className="my-2 text-danger">There wiil be no customer in waiting list</h4> : <h2>There will be {data.length} customer in waiting list </h2>
+        }
           {/* boostrap table  */}
-          <table class="table table-striped">
+          <table className="table table-striped mt-2">
             <thead>
               <tr>
                 <th scope="col">id</th>
@@ -119,6 +125,11 @@ const Shopcustomer = () => {
               </tr>
             </thead>
             <tbody>
+              {
+                data.map((obj)=>{
+
+                })
+              }
             </tbody>
           </table>
           {/* {!newCustomer ? (
