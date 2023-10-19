@@ -12,8 +12,9 @@ const { addcustomerlist } = require("../controllers/shopOwner/customerlist");
 
 router.route("/getprofile").get(isShopOwnerLoggedIn, getprofile);
 router.route("/updateprofile").post(isShopOwnerLoggedIn, updateProfile);
+router.route("/deleteprofile").delete(isShopOwnerLoggedIn, deleteprofile);
 router.route("/customerlist").get(isShopOwnerLoggedIn, customerlist);
-router.route("/updatecustomerlist").post(isShopOwnerLoggedIn, updatecustomerlist);
+router.route("/updatecustomerlist/:Customer_id").post(isShopOwnerLoggedIn, updatecustomerlist);
 router.route("/addcustomerlist").post(isShopOwnerLoggedIn, addcustomerlist);
 
 module.exports = router;

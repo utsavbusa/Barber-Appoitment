@@ -6,7 +6,7 @@ import { AiFillFolderAdd, AiOutlineClose } from "react-icons/ai";
 
 const Shopownerprofile = () => {
 
-    const[data,setData] = useState({ "services": []});
+    const[data,setData] = useState({ "services": [],name:"",number:"",email:"",address:"",barber:""});
     const[message,setMessage] = useState("");
     const[inputValue,setInputValue] = useState("");
     const[isupdatebtn,setisupdatbtn] = useState(false);
@@ -87,6 +87,24 @@ const Shopownerprofile = () => {
       );
     };
 
+    function deleteprofile(){
+      fetch("http://localhost:3001/api/v1/user/shopowner/deleteprofile", {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          "token": cookie.get("shopOwnerToken")
+        },
+      }).then(res => res.json())
+        .then(res => {
+          if (res.status === "OK") {
+            cookie.remove("shopOwnerToken");
+            navigate("/Login/shopowner");
+          }
+
+        })
+        .catch(e => console.log("error : " + e));
+    }
+
 
     return (
       <div className=" container overflow-auto" style={{ height: "100vh" }}>
@@ -109,7 +127,7 @@ const Shopownerprofile = () => {
 
             {/* number of shopowner */}
             <div className="mb-4">
-              <label className="form-label">ShopOwner Name :</label>
+              <label className="form-label">ShopOwner Number :</label>
               <input
                 style={{ backgroundColor: "#f7f7f8" }}
                 type="number"
@@ -191,9 +209,9 @@ const Shopownerprofile = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.services.map((item) => {
+                  {data.services.map((item,index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td>{item}</td>
                         <td>
                           <AiOutlineClose
@@ -220,6 +238,13 @@ const Shopownerprofile = () => {
               disabled={isupdatebtn ? false : true} 
             >
               Update Profile
+            </button>
+            <button
+              className="btn btn-danger btn-block mb-4"
+              style={{marginLeft:"1rem"}}
+              onClick={()=>{deleteprofile()}}
+            >
+              Delete Profile
             </button>
           </form>
         </div>

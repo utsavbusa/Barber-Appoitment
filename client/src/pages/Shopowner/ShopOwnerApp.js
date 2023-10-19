@@ -14,19 +14,16 @@ const ShopOwnerApp = (props) => {
 
     const menuItems = [
       {
-        text: "Dashboard",
+        index: 1,
+        text: "Customer List",
         icon: "/images/grid.svg",
         path: "/user/shopowner/customer",
       },
       {
+        index: 2,
         text: "Admin Profile",
         icon: "/images/user.svg",
         path: "/user/shopowner/profile",
-      },
-      {
-        text: "Customer",
-        icon: "/images/folder.svg",
-        path: "/user/shopowner/customer",
       },
     ];
 
@@ -78,14 +75,14 @@ const ShopOwnerApp = (props) => {
               className={`d-flex ${
                 isExpanded
                   ? "justify-content-center"
-                  : "justify-content-start p-2"
+                  : "justify-content-center p-2"
               } pt-3`}
               style={{ paddingLeft: "4px" }}
             >
               <div>
                 {isExpanded && (
                   <div className="nav-brand d-flex">
-                    <img src="images/Logo.svg" alt="" srcset="" />
+                    <img src="images/Logo.svg" alt="" srcSet="" />
                     <h2>appoitment </h2>
                   </div>
                 )}
@@ -102,8 +99,8 @@ const ShopOwnerApp = (props) => {
               </div>
             </div>
             <div style={{ marginTop: "30px" }}>
-              {menuItems.map(({ text, icon ,path }) => (
-                <Link 
+              {menuItems.map(({ text, icon ,path ,index }) => (
+                <Link  key={index}
                 to={path}
                   className={`text-uppercase text-color-light d-flex ${
                     isExpanded
@@ -125,7 +122,7 @@ const ShopOwnerApp = (props) => {
                       src={icon}
                       width={30}
                       alt=""
-                      srcset=""
+                      srcSet=""
                     />
                   </div>
                   <div>
@@ -147,7 +144,7 @@ const ShopOwnerApp = (props) => {
                     src="/images/admin-avatar.svg"
                     alt=""
                     style={{ width: "100px", padding: "0 20px" }}
-                    srcset=""
+                    srcSet=""
                   />
                   <div className="nav-footer-info">
                     <p style={{ fontSize: "18px", fontWeight: "900" }}>hrsu</p>
@@ -163,7 +160,7 @@ const ShopOwnerApp = (props) => {
                 width={35}
                 onClick={logOut}
                 alt=""
-                srcset=""
+                srcSet=""
               />
             </div>
           </div>

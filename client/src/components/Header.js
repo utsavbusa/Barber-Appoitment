@@ -83,7 +83,7 @@ const Header = (props) => {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link
-                  to="/"
+                  to="/user/Customer/home"
                   className="nav-link text-light"
                   aria-current="page"
                   href="#"
@@ -92,12 +92,12 @@ const Header = (props) => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/about" className="nav-link text-light" href="#">
+                <Link to="/user/Customer/about" className="nav-link text-light" href="#">
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/contact" className="nav-link text-light" href="#">
+                <Link to="/user/Customer/contact" className="nav-link text-light" href="#">
                   Contact
                 </Link>
               </li>
