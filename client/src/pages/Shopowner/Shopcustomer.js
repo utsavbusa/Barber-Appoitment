@@ -30,7 +30,7 @@ const Shopcustomer = () => {
 
       })
       .catch(e => console.log("error : " + e));
-  }, []);
+  }, [navigate]);
 
   console.log(data);
 
@@ -164,7 +164,7 @@ const Shopcustomer = () => {
             </div>
           </div>
         {
-            data.length == 0 ? <h4 className="my-2 text-danger">There wiil be no customer in waiting list</h4> : <h4 className="my-2">There will be {data.length} customer in waiting list </h4>
+            data.length === 0 ? <h4 className="my-2 text-danger">There wiil be no customer in waiting list</h4> : <h4 className="my-2">There will be {data.length} customer in waiting list </h4>
         }
         {/* message is not empty so i will put popbox which so the message and after automaticaly remove 2 sec please write code */}
           {
@@ -192,7 +192,7 @@ const Shopcustomer = () => {
                       <td>{index + 1}</td>
                       <td>{obj.name}</td>
                       <td>{obj.number}</td>
-                      <td onClick={()=>{updateCustomerList(obj._id)}}><GiCheckMark /></td>
+                      <td onClick={()=>{updateCustomerList(obj._id)}} style={{cursor:"pointer"}}><GiCheckMark /></td>
                     </tr>
                   )
                 })
